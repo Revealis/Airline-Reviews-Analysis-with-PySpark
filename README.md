@@ -62,7 +62,8 @@ Some examples:
 ![image](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/de828dea-82cd-41c4-9b98-2a13ebbedd4c)
 ::
 
-![image](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/0ecb66ef-3662-4432-929e-b399969cc9a2)
+![image](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/33ee7781-aab4-467a-8384-c6f759bb158e)
+
 
 ::
 
@@ -70,7 +71,8 @@ Some examples:
 
 ::
 
-![image](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/6251d16d-3b7a-4d5a-88a0-1751e44799ad)
+![image](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/1e1b5f03-1489-41c5-97e8-6f9aa46af5f5)
+
 
 
 
