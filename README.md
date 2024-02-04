@@ -34,11 +34,11 @@ Analyze the data:
 Some examples:
 
 ![image](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/de828dea-82cd-41c4-9b98-2a13ebbedd4c)
+
+
 ::
 
 ![Sarı ve beyaz sade düz arka plan pozitif olumlu instagram gönderisi](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/441650e0-e8f2-4dc3-b10b-ef6753132c0e)
-
-
 
 ::
 
@@ -46,7 +46,9 @@ Some examples:
 
 ::
 
-![image](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/1e1b5f03-1489-41c5-97e8-6f9aa46af5f5)
+
+![Sarı ve beyaz sade düz arka plan pozitif olumlu instagram gönderisi (1)](https://github.com/Revealis/Airline-Reviews-Analysis-with-PySpark/assets/126680990/e575c255-9184-41bb-8e14-34fc13381070)
+
 
 
 
