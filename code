@@ -1,0 +1,59 @@
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import avg
+from pyspark.sql.functions import col
+from pyspark.sql.types import StructType, StructField, IntegerType, StringType
+import matplotlib.pyplot as plt
+import pandas as pd
+#from graphframes import GraphFrame If you want to use spark's own graphics library(like GraphX).
+spark = SparkSession.builder.appName("Airlinereviews").getOrCreate()
+df = spark.read.csv("dbfs:/FileStore/tables/airlinesCSV.csv", header=True, inferSchema=True)
+schema = StructType([
+    StructField("_c0", IntegerType(), True),
+    StructField("OverallRating", IntegerType(), True),
+    StructField("ReviewHeader", StringType(), True),
+    StructField("Name", StringType(), True),
+    StructField("Datetime", StringType(), True),
+    StructField("VerifiedReview",StringType(), True),
+    StructField("ReviewBody", StringType(), True),
+    StructField("TypeOfTraveller", StringType(), True),
+    StructField("SeatType", StringType(), True),
+    StructField("Route", StringType(), True),
+    StructField("DateFlown", StringType(), True),
+    StructField("SeatComfort", IntegerType(), True),
+    StructField("GroundService", IntegerType(), True),
+    StructField("CabinStaffService", IntegerType(), True),
+    StructField("ValueForMoney", IntegerType(), True),
+    StructField("Recommended", StringType(), True),
+    StructField("Aircraft", StringType(), True),
+    StructField("Food&Beverages", IntegerType(), True),
+    StructField("InflightEntertainment", IntegerType(), True),
+    StructField("Wifi&Connectivity", IntegerType(), True),
+])
+df = df.withColumnRenamed("Food&Beverages", "FoodAndBeverages").withColumnRenamed("Wifi&Connectivity", "WifiAndConnectivity").withColumnRenamed("_c0", "Pid") 
+df_average = df.agg(avg("WifiAndConnectivity")).collect()
+df = df.drop("_C20") 
+df_replaced1 = df.na.fill("4.749101961867919", subset=["OverallRating"])
+df_replaced2 = df_replaced1.na.fill("Unknown", subset=["Route"])
+df_replaced3 = df_replaced2.na.fill("Unspecified", subset=["Aircraft"])  
+df_replaced4 = df_replaced3.na.fill("No_title", subset=["ReviewHeader"])
+df_replaced5 = df_replaced4.na.fill("Anonymous", subset=["Name"])
+df_replaced6 = df_replaced5.na.fill("No_Date", subset=["Datetime"])
+df_replaced7 = df_replaced6.na.fill("Uncertain", subset=["VerifiedReview"])
+df_replaced8 = df_replaced7.na.fill("No_Details", subset=["ReviewBody"])
+df_replaced9 = df_replaced8.na.fill("No_Type", subset=["TypeOfTraveller"])
+df_replaced10 = df_replaced9.na.fill("No_Type", subset=["SeatType"]) 
+df_replaced11 = df_replaced10.na.fill("No_Date", subset=["DateFlown"]) 
+df_replaced12 = df_replaced11.na.fill("2.909148066645709", subset=["SeatComfort"])
+df_replaced13 = df_replaced12.na.fill("2.810250391236307", subset=["GroundService"])
+df_replaced14 = df_replaced13.na.fill("3.2754658385093167", subset=["CabinStaffService"])
+df_replaced15 = df_replaced14.na.fill("2.7324690630524455", subset=["ValueForMoney"])
+df_replaced16 = df_replaced15.na.fill("2.3617021276595747", subset=["Recommended"])
+df_replaced17 = df_replaced16.na.fill("2.753233830845771", subset=["FoodAndBeverages"])
+df_replaced18 = df_replaced17.na.fill("2.6482643245503974", subset=["InflightEntertainment"])
+df_replaced19 = df_replaced18.na.fill("2.025796661608498", subset=["WifiAndConnectivity"])
+
+#unknown_col = df_replaced2.filter(col("Aircraft")=="Unspecified") #To find what you want in a column
+#null_row_count = df_replaced8.filter(col("Datetime").isNull()).count() #To see how many nulls there are
+df_replaced19.createOrReplaceTempView("my_table_view")
+result = spark.sql("SELECT Pid FROM my_table_view WHERE WifiAndConnectivity = '5'")
+result.show()
