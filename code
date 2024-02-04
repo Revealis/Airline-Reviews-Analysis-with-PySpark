@@ -4,6 +4,7 @@ from pyspark.sql.functions import col
 from pyspark.sql.types import StructType, StructField, IntegerType, StringType
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 #from graphframes import GraphFrame If you want to use spark's own graphics library(like GraphX).
 spark = SparkSession.builder.appName("Airlinereviews").getOrCreate()
 df = spark.read.csv("dbfs:/FileStore/tables/airlinesCSV.csv", header=True, inferSchema=True)
